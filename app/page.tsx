@@ -12,6 +12,8 @@ export default function Home() {
   const [pages,setPages] = useState<number>()
   const [articles,setArticles] = useState<string>()
   const [datas,setDatas] = useState<string>()
+  const [tests,setTests] = useState<string>()
+  
 
   // const getRakuten = async() => {
   //   const res = await fetch("/api/");
@@ -32,7 +34,6 @@ useEffect(() => {
       const res = await fetch(`/api/users?page=${i}`);
       const data = await res.json();
       const users = data.data.contents.map(user => user.urlname);
-      const likes = data.data.contents.map(user => user.likeCount);
       // ユーザーデータを追加
       allUsers = [...allUsers, ...users];
       
@@ -80,7 +81,7 @@ useEffect(() => {
     getNotes();
   };
 }, []);
-// console.log(notes)
+console.log(notes)
   console.log(users)
   console.log(pages)
   console.log(articles)
@@ -90,12 +91,22 @@ useEffect(() => {
   console.log(allUsers)
   console.log(allDatas)
 
+  // useEffect(() => {
+  //   const testFetch = async() => {
+  //     const testData = await fetch("api/test");
+  //     const json = await testData.json();
+  //     setTests(json)
+  //   }
+
+  //   testFetch()
+  // },[])
+
+  // console.log(tests)
 
   return (
     <div>
       <main className="flex min-h-screen flex-col items-center justify-between p-24 text-xl font-bold">
         <h1>いいね数ランキング</h1>
-        {/* <button onClick={getRakuten}>rakutenボタン</button> */}
         {datas && datas.map((data) => (
         <div key={data.user}>
           <p className="text-red-700">ユーザー名：{data.user}</p>
