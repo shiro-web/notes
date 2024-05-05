@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import prisma from "./lib/prismaClient"
 
 export default function Home() {
   const [rakutens, setRakutens] = useState(undefined);
@@ -14,7 +15,6 @@ export default function Home() {
   const [datas,setDatas] = useState<string>()
   const [tests,setTests] = useState<string>()
   
-
   // const getRakuten = async() => {
   //   const res = await fetch("/api/");
   //   const data = await res.json();
