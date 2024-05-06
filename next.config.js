@@ -3,7 +3,7 @@ module.exports = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'item.rakuten.co.jp',
+          hostname: 'assets.st-note.com',
         }
       ],
     },

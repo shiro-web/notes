@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = async() => {
 
-    const response = await fetch("http://localhost:3000/api/post",{
+    const response = await fetch("http://localhost:3001/api/post",{
     cache:"no-store",
   })
 
