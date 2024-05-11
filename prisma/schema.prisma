@@ -14,13 +14,13 @@ datasource db {
 }
 
 model Article {
-  id           Int @id @default(autoincrement())
-  user_name    String
-  title        String
-  user_image   String
-  article_link String
-  liike_count  Int
-  created_at   DateTime @default(now())
-  category     String
-  category_id  Int
+  id          Int @id @default(autoincrement())
+  userName    String
+  articleName String
+  likeCount   Int
+  eyecatch    String
+  noteUrl     String
+  nickname    String
+  userImage   String
+  created_at  DateTime @default(now())
 }
