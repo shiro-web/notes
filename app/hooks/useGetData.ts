@@ -4,23 +4,16 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [rakutens, setRakutens] = useState(undefined);
-  const [notes, setNotes] = useState([]);
-  const [users,setUsers] = useState([])
-  const [counts,setCounts] = useState<number>()
-  const [pages,setPages] = useState<number>()
-  const [articles,setArticles] = useState<string>()
-  const [datas,setDatas] = useState<string>()
-  const [tests,setTests] = useState<string>()
-  
+  const [users,setUsers] = useState<string[]>([])
+  const [pages,setPages] = useState<number[]>([])
+  const [articles,setArticles] = useState<string[]>()
  
 useEffect(() => {
   const fetchData = async() => {
     try {
-    let allDatas = []
     let allArticles = [];
-    let allUsers = [];
-    let allPages = [];
+    let allUsers:string[] = [];
+    let allPages:number[] = [];
       
     for (let i = 1;i < 1000 ; i++) {
       const res = await fetch(`/api/users?page=${i}`);
