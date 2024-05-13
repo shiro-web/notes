@@ -22,7 +22,7 @@ useEffect(() => {
     let allUsers = [];
     let allPages = [];
       
-    for (let i = 1;i < 101 ; i++) {
+    for (let i = 1;i < 1000 ; i++) {
       const res = await fetch(`/api/users?page=${i}`);
       const data = await res.json();
       const users = data.data.contents.map(user => user.urlname);
@@ -33,7 +33,7 @@ useEffect(() => {
   
     setUsers(allUsers);
   
-    for (let i = 0 ; i < users.length; i++) {
+    for (let i = 0 ; i < allUsers.length; i++) {
       const res2 = await fetch(`/api/count?user=${allUsers[i]}`);
       const data2 = await res2.json();
       const counts = data2.data.noteCount; 
@@ -44,8 +44,8 @@ useEffect(() => {
   
     setPages(allPages);
     
-    for (let i = 0; i < users.length; i++) {
-      for (let j = 1; j <= allPages[i]; j++) {
+    for (let i = 0; i < allUsers.length; i++) {
+      for (let j = 1; j <= Math.min(101, allPages[i]); j++) {
         const res = await fetch(`/api?user=${allUsers[i]}&kind=note&page=${j}`);
         const data = await res.json();
         const articles = data.data.contents.map(note => ({
@@ -59,7 +59,11 @@ useEffect(() => {
           userImage : note.user.userProfileImagePath
         }));
         allArticles.push(...articles);
+        if (allArticles.length % 1000 === 0) {
+          await delay(15000);
+        }
       }
+      
 
     }
           // いいね数で降順に並べ替え
@@ -76,7 +80,7 @@ useEffect(() => {
   };
   fetchData();
 }, []);
-
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const saveToDatabase = async(article) => {
   
   try {

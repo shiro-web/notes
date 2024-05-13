@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import prisma from "./lib/prismaClient";
 import useGetData from './hooks/useGetData.ts';
 
 export default function Home() {
