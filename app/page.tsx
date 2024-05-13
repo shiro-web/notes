@@ -25,7 +25,7 @@ export default function Home() {
 
 useEffect(() => {
   const fetchData = async() => {
-    const response = await fetch(`api/get`)
+    const response = await fetch(`https://notes-bice-seven.vercel.app/api/get`)
     const rankData = await response.json()
     setRows(rankData)
     console.log(rankData)
