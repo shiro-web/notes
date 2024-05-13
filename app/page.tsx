@@ -25,7 +25,7 @@ export default function Home() {
 
 useEffect(() => {
   const fetchData = async() => {
-    const response = await fetch(`http://localhost:3000/api/get`)
+    const response = await fetch(`api/get`)
     const rankData = await response.json()
     setRows(rankData)
     console.log(rankData)
