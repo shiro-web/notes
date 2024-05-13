@@ -7,7 +7,31 @@ export default function Home() {
   const [users,setUsers] = useState<string[]>([])
   const [pages,setPages] = useState<number[]>([])
   const [articles,setArticles] = useState<string[]>()
- 
+
+  interface Note {
+    id: string;
+    name: string;
+    likeCount: number;
+    eyecatch: string;
+    noteUrl: string;
+    user: {
+      nickname: string;
+      userProfileImagePath: string;
+    };
+  }
+
+  interface Article {
+    id: any;
+    userName: any; 
+    articleName: any; 
+    likeCount: any; 
+    eyecatch: any; 
+    noteUrl: any; 
+    nickname: any; 
+    userImage: any; 
+  }
+  
+  
 useEffect(() => {
   const fetchData = async() => {
     try {
@@ -18,7 +42,7 @@ useEffect(() => {
     for (let i = 1;i < 1000 ; i++) {
       const res = await fetch(`/api/users?page=${i}`);
       const data = await res.json();
-      const users = data.data.contents.map(user => user.urlname);
+      const users = data.data.contents.map((user: { urlname: string; }) => user.urlname);
       // ユーザーデータを追加
       allUsers = [...allUsers, ...users];
       
@@ -41,7 +65,7 @@ useEffect(() => {
       for (let j = 1; j <= Math.min(101, allPages[i]); j++) {
         const res = await fetch(`/api?user=${allUsers[i]}&kind=note&page=${j}`);
         const data = await res.json();
-        const articles = data.data.contents.map(note => ({
+        const articles = data.data.contents.map((note:Note) => ({
           id: note.id,
           userName: allUsers[i],
           articleName: note.name,
@@ -73,8 +97,8 @@ useEffect(() => {
   };
   fetchData();
 }, []);
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-const saveToDatabase = async(article) => {
+const delay = (ms: number | undefined) => new Promise(resolve => setTimeout(resolve, ms));
+const saveToDatabase = async(article:Article) => {
   
   try {
     await fetch ("http://localhost:3000/api/post",{
